@@ -13,7 +13,6 @@ import (
 // CreatePerson - create person end point
 func CreatePerson(response http.ResponseWriter, request *http.Request) {
 	client, err := db.Connection()
-	fmt.Println("run")
 	if err != nil {
 		fmt.Println(err)
 	}
