@@ -5,12 +5,16 @@ import (
 	"go-server/api"
 	"log"
 	"net/http"
+
+	"github.com/gorilla/mux"
 )
 
 // RouteHandler - Handle routes
 func RouteHandler() {
-	http.HandleFunc("/", api.Homepage)
-	http.HandleFunc("/articles", api.AllArticles)
+	router := mux.NewRouter()
+	router.HandleFunc("/", api.Homepage)
+	router.HandleFunc("/person", api.CreatePerson).Methods("POST")
+	router.HandleFunc("/articles", api.AllArticles)
 	fmt.Println("Server is running on port 9090 ...")
-	log.Fatal(http.ListenAndServe(":9090", nil))
+	log.Fatal(http.ListenAndServe(":9090", router))
 }
